@@ -6,10 +6,10 @@
 .arr-bar {
     width: 20px;
     display: inline-block;
-    margin: 0 1px;
+    margin: 0 6px;
 }
 .arr-val{
     position: absolute;
     top: 0px; left: 0px;
-    
+
 }

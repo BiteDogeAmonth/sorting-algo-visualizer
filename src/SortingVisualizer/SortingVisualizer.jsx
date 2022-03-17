@@ -1,14 +1,14 @@
 import React from "react";
 import "./SortingVisualizer.css"
 import { getMergeAni } from "../SortingAlgos/mergeSort";
-import { getBubbleAni } from "../SortingAlgos/mergeSort";
+import { getBubbleAni } from "../SortingAlgos/bubbleSort";
 
 export class SortingVisualizer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             history: [{
-                nums: Array(50).fill(0)
+                nums: Array(35).fill(0)
             }],
             step: 0,
             animations: [[0, 1], [2, 3], [4, 5]],
@@ -17,8 +17,8 @@ export class SortingVisualizer extends React.Component {
     }
 
     resetArray() {
-        const array = Array(50).fill(0);
-        for (let i = 0; i < 50; i++) {
+        const array = Array(35).fill(0);
+        for (let i = 0; i < 35; i++) {
             array[i] = randomIntFromInterval(5, 500);
         }
 
@@ -31,7 +31,7 @@ export class SortingVisualizer extends React.Component {
 
     display() {
 
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 35; i++) {
             const val = document.getElementById("bar" + i);
             if (val.style.visibility === "hidden") {
                 val.style.visibility = "visible";
