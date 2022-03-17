@@ -1,6 +1,7 @@
 import React from "react";
 import "./SortingVisualizer.css"
-import { getAnimations } from "../SortingAlgos/mergeSort";
+import { getMergeAni } from "../SortingAlgos/mergeSort";
+import { getBubbleAni } from "../SortingAlgos/mergeSort";
 
 export class SortingVisualizer extends React.Component {
     constructor(props) {
@@ -10,8 +11,8 @@ export class SortingVisualizer extends React.Component {
                 nums: Array(50).fill(0)
             }],
             step: 0,
-            disVal: false,
             animations: [[0, 1], [2, 3], [4, 5]],
+            sorted: false,
         }
     }
 
@@ -24,66 +25,44 @@ export class SortingVisualizer extends React.Component {
         this.setState({
             history: [{nums:array}],
             step: 0,
+            sorted: false,
         });
     }
 
     display() {
-        if (!this.state.disVal) {
-            for (let i = 0; i < 50; i++) {
-                document.getElementById("bar" + i).style.visibility="visible";
+
+        for (let i = 0; i < 50; i++) {
+            const val = document.getElementById("bar" + i);
+            if (val.style.visibility === "hidden") {
+                val.style.visibility = "visible";
+            } else {
+                val.style.visibility = "hidden";
             }
-            this.setState({disVal:true});
-        } else {
-            for (let i = 0; i < 50; i++) {
-                document.getElementById("bar" + i).style.visibility="hidden";
-            }
-            this.setState({disVal:false});
+        }
+
+    }
+
+
+    mergeSort() {
+        if (!this.state.sorted) {
+            let arr = this.state.history[this.state.step].nums.slice();
+            const steps = getMergeAni(arr);
+            this.showAnimation(steps, 100);
         }
     }
 
-    mergeSortHelper(i, j) {
-        const history = this.state.history.slice();
-        const step = this.state.step;
-        var nums = history[step].nums.slice();
-        const num1 = nums[i];
-        const num2 = nums[j];
-        nums[i] = num2;
-        nums[j] = num1;
-        this.setState({
-            history: history.concat({nums:nums}),
-            step: step + 1, 
-        });
+    bubbleSort() {
+        if (!this.state.sorted) {
+            let arr = this.state.history[this.state.step].nums.slice();
+            const steps = getBubbleAni(arr);
+            this.showAnimation(steps, 40);
+        }
     }
 
-    mergeSort(ani) {
-        const bar1 = document.getElementById("longbar" + ani[0]);
-        const val1 = document.getElementById("bar" + ani[0]);
-        const bar2 = document.getElementById("longbar" + ani[1]);
-        const val2 = document.getElementById("bar" + ani[1]);
-        bar1.style.backgroundColor = "red";
-        bar2.style.backgroundColor = "red";
-        setTimeout(() => {
-            const num1 = val1.innerHTML;
-            const num2 = val2.innerHTML;
-            val2.innerHTML = num1;
-            val1.innerHTML = num2;
-            bar1.style.height = num2 + "px";
-            bar2.style.height = num1 + "px";
-            bar1.style.backgroundColor = "blue";
-            bar2.style.backgroundColor = "blue";
-        }, 150);
-    
-    
-    }
-    
-    getMergeSortAni() {
-        let arr = this.state.history[this.state.step].nums.slice();
-        const steps = getAnimations(arr);
-        return steps;
-    }
-    
-    autoClick() {
-        const steps = this.getMergeSortAni();
+
+
+
+    showAnimation(steps, speed) {
         for (let i = 0; i < steps.length; i++) {
             const ani = steps[i].slice();
             const bar1 = document.getElementById("longbar" + ani[0]);
@@ -97,15 +76,18 @@ export class SortingVisualizer extends React.Component {
                 val1.innerHTML = num2;
                 bar1.style.height = num2 + "px";
                 bar2.style.height = num1 + "px";
-            }, (i+1) * 100);
+            }, (i+1) * speed);
         }
+        this.setState({sorted:true});
     }
 
     handleClick(i) {
-        const curr = this.state.history[this.state.step].nums.slice();
-        document.getElementById("bar" + i).setAttribute("value", `${curr[i]}`);
-
-
+        const bar = document.getElementById("longbar" + i);
+        if (bar.style.backgroundColor==="blue") {
+            bar.style.backgroundColor="red";
+        } else {
+            bar.style.backgroundColor="blue";
+        }
     }
 
 
@@ -121,8 +103,8 @@ export class SortingVisualizer extends React.Component {
             <div>
                 <button onClick={()=>this.resetArray()}> {"generate array"} </button>
                 <button onClick={()=>this.display()}>{"display value"}</button>
-                <button onClick={()=>this.getMergeSortAni()}> {"merge-sort"} </button>
-                <button onClick={()=>this.autoClick()}>{"auto"}</button>
+                <button onClick={()=>this.mergeSort()}>{"merge-sort"}</button>
+                <button onClick={()=>this.bubbleSort()}>{"bubble-sort"}</button>
                 <div className="arr-container">
                     {arr.map((value, idx) => (<Bar value={value} key={idx} id={"bar" + idx} onClick={()=>this.handleClick(idx)}></Bar>))}
                 </div>
