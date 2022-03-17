@@ -1,0 +1,15 @@
+.arr-container {
+    margin-top: 50px;
+}
+
+
+.arr-bar {
+    width: 20px;
+    display: inline-block;
+    margin: 0 1px;
+}
+.arr-val{
+    position: absolute;
+    top: 0px; left: 0px;
+    
+}
