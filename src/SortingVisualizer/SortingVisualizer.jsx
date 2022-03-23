@@ -123,7 +123,7 @@ function Bar(props) {
 
     return (
             <div className="arr-bar">
-            <div id={props.id} style={{visibility:"hidden"}}>{props.value}</div>
+            <div id={props.id} style={{visibility:"hidden", fontSize:"60%"}}>{props.value}</div>
             <button  
                     value={props.value} 
                     onClick={()=>props.onClick()}

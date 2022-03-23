@@ -4,12 +4,7 @@
 
 
 .arr-bar {
-    width: 20px;
+    width: 2%;
     display: inline-block;
-    margin: 0 6px;
-}
-.arr-val{
-    position: absolute;
-    top: 0px; left: 0px;
-
+    margin: 0 0.2%;
 }
