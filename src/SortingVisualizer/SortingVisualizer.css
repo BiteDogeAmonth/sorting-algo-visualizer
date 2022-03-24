@@ -1,10 +1,75 @@
+
 .arr-container {
     margin-top: 50px;
 }
-
 
 .arr-bar {
     width: 2%;
     display: inline-block;
     margin: 0 0.2%;
 }
+
+.buttons {
+    margin-top: 20px;
+}
+
+.singleButton {
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 0%;
+    background-color: grey;
+    border: greenyellow 2px;
+}
+
+.singleButton:hover {
+    background-color: palevioletred;
+}
+
+.mark {
+    width: 8px;
+    height: 8px;
+    border: 2px solid rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 100%;
+    margin-top: 16px;
+}
+.horizontal-slider {
+    width: 100%;
+    max-width: 300px;
+    height: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .example-thumb {
+    cursor: pointer;
+    position: absolute;
+    z-index: 100;
+    background: #ffffff;
+    border: 5px solid #3774ff;
+    border-radius: 100%;
+    display: block;
+    box-shadow: 0 0 2px 0 rgb(0 0 0 / 44%);
+  }
+  .example-thumb.active {
+    background-color: grey;
+  }
+  .track {
+    position: relative;
+    background: grey;
+  }
+  .track.track-0 {
+    background: #0000ff;
+  }
+  .horizontal-slider .track {
+    top: 20px;
+    height: 4px;
+  }
+  .horizontal-slider .example-thumb {
+    top: 12px;
+    width: 10px;
+    outline: none;
+    height: 10px;
+    line-height: 38px;
+  }
